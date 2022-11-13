@@ -20,9 +20,10 @@ reqMem: 64Mi
 limitCPU: 200m
 limitMem: 128Mi
 serviceAccountName: default
-portName: grpc
+portName: http
+
 
 ####Service#####
 serviceType: ClusterIP
-servicePort: 8080
+servicePort: 80
 targetPort: 8080

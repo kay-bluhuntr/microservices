@@ -1,61 +1,81 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "front-end.fullname" . }}
-  labels:
-    {{- include "front-end.labels" . | nindent 4 }}
-spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+  name: {{ .Values.appName }}
+spec: 
+  replicas: {{ .Values.appReplicas }}
   selector:
     matchLabels:
-      {{- include "front-end.selectorLabels" . | nindent 6 }}
+      app: {{ .Values.appName }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
-        {{- include "front-end.selectorLabels" . | nindent 8 }}
+        app: {{ .Values.appName }}
+      namespace: {{ .Values.namespace }}
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: "true"
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "front-end.serviceAccountName" . }}
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      terminationGracePeriodSeconds: 5
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: {{ .Values.service.port }}
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
+      - name: {{ .Values.appName }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - all
+          privileged: false
+          readOnlyRootFilesystem: true
+        image: "{{ .Values.appImage }}/{{ .Values.appName }}:{{ .Values.appVersion }}"
+        imagePullPolicy: Always
+        ports:
+        - name: {{ .Values.portName }}
+          containerPort: {{ .Values.containerPort }}
           readinessProbe:
+            initialDelaySeconds: 10
             httpGet:
-              path: /
-              port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+              path: "/_healthz"
+              port: 8080
+              httpHeaders:
+              - name: "Cookie"
+                value: "shop_session-id=x-readiness-probe"
+          livenessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              path: "/_healthz"
+              port: 8080
+              httpHeaders:
+              - name: "Cookie"
+                value: "shop_session-id=x-liveness-probe"
+        env:
+        {{- range .Values.containerEnvVariables }}
+        - name: {{ .name }}
+          value: {{ .value | quote }}
+        {{- end }}
+        resources:
+          requests:
+            cpu: {{ .Values.reqCPU }}
+            memory: {{ .Values.reqMem }}
+          limits:
+            cpu: {{ .Values.limitCPU }}
+            memory: {{ .Values.limitMem }}
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-external
+spec:
+  type: LoadBalancer
+  selector:
+    app: frontend
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
