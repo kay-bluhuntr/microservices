@@ -1,24 +1,24 @@
 ####Deployment####
-appName: servicename
+appName: recommendationservice
 appImage: gcr.io/google-samples/microservices-demo
-appService: cartservice
 appReplicas: 1
 appVersion: v0.4.1
 containerPort: 8080
 containerEnvVariables:
-- name: Env_Var_One
-  value: "7"
-- name: Env_Var_Two
+- name: PORT
+  value: "8080"
+- name: DISABLE_TRACING
   value: "1"
-- name: Env_Var_Three
+- name: DISABLE_PROFILER
   value: "1"
-- name: Env_Var_Four
+- name: DISABLE_DEBUGGER
   value: "1"
-namespace: default
+- name: PRODUCT_CATALOG_SERVICE_ADDR
+  value: "productcatalogservice:3550"
 reqCPU: 100m
-reqMem: 64Mi
+reqMem: 220Mi
 limitCPU: 200m
-limitMem: 128Mi
+limitMem: 450Mi
 serviceAccountName: default
 portName: grpc
 

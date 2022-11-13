@@ -41,8 +41,8 @@ spec:
         {{- end }}
         resources:
           requests:
-            cpu: 100m
-            memory: 64Mi
+            cpu: {{ .Values.reqCPU }}
+            memory: {{ .Values.reqMem }}
           limits:
-            cpu: 200m
-            memory: 128Mi
+            cpu: {{ .Values.limitCPU }}
+            memory: {{ .Values.limitMem }}
