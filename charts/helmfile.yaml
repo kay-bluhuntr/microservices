@@ -1,0 +1,80 @@
+releases:
+  - chart: online-shopping
+    cleanupOnFail: true
+    devel: false
+    name: adservice
+    skipDeps: false
+    values:
+      - online-shopping/values/adservice-value.yaml
+
+  - chart: online-shopping
+    cleanupOnFail: true
+    devel: false
+    name: cartservice
+    skipDeps: false
+    values:
+      - online-shopping/values/cartservice-value.yaml
+
+  - chart: online-shopping
+    cleanupOnFail: true
+    devel: false
+    name: checkoutservice
+    skipDeps: false
+    values:
+      - online-shopping/values/checkoutservice-value.yaml
+
+  - chart: online-shopping
+    cleanupOnFail: true
+    devel: false
+    name: currencyservice
+    skipDeps: false
+    values:
+      - online-shopping/values/currencyservice-value.yaml
+
+  - chart: online-shopping
+    cleanupOnFail: true
+    devel: false
+    name: emailservice
+    skipDeps: false
+    values:
+      - online-shopping/values/emailservice-value.yaml
+
+  - chart: online-shopping
+    cleanupOnFail: true
+    devel: false
+    name: paymentservice
+    skipDeps: false
+    values:
+      - online-shopping/values/paymentservice-value.yaml
+
+  - chart: online-shopping
+    cleanupOnFail: true
+    devel: false
+    name: productcatalogservice
+    skipDeps: false
+    values:
+      - online-shopping/values/productcatalogservice-value.yaml
+
+  - chart: online-shopping
+    cleanupOnFail: true
+    devel: false
+    name: recommendationservice
+    skipDeps: false
+    values:
+      - online-shopping/values/recommendationservice-value.yaml
+
+  - chart: online-shopping
+    cleanupOnFail: true
+    devel: false
+    name: shippingservice
+    skipDeps: false
+    values:
+      - online-shopping/values/shippingservice-value.yaml
+
+  - chart: front-end
+    cleanupOnFail: true
+    devel: false
+    name: frontendservice
+    skipDeps: false
+    values:
+      - front-end/values/frontend-value.yaml
