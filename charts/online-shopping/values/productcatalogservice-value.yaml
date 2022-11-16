@@ -2,7 +2,7 @@
 appName: productcatalogservice
 appImage: gcr.io/google-samples/microservices-demo
 appReplicas: 1
-appVersion: v0.4.1
+#appVersion: v0.4.1
 containerPort: 3550
 containerEnvVariables:
 - name: PORT

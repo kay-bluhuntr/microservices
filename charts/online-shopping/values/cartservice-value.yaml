@@ -2,7 +2,7 @@
 appName: cartservice
 appImage: gcr.io/google-samples/microservices-demo
 appReplicas: 1
-appVersion: v0.4.1
+#appVersion: v0.4.1
 containerPort: 7070
 containerEnvVariables:
 - name: REDIS_ADDR

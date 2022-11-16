@@ -41,5 +41,5 @@ portName: grpc
 
 ####Service#####
 serviceType: ClusterIP
-servicePort: 5050
-targetPort: 5050
+servicePort: 80
+targetPort: 8080

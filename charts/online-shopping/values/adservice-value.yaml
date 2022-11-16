@@ -2,7 +2,7 @@
 appName: adservice
 appImage: gcr.io/google-samples/microservices-demo
 appReplicas: 1
-appVersion: v0.4.1
+#appVersion: v0.4.1
 containerPort: 9555
 containerEnvVariables:
 - name: PORT
@@ -14,7 +14,7 @@ containerEnvVariables:
 reqCPU: 300m
 reqMem: 180Mi
 limitCPU: 300m
-limitMem: 300Mi
+limitMem: 500Mi
 namespace: microservices-development
 serviceAccountName: default
 portName: grpc
