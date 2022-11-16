@@ -11,8 +11,10 @@ spec:
     metadata:
       labels:
         app: loadgenerator
+        env: serverless
       annotations:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
+      namespace: microservices-development
     spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5

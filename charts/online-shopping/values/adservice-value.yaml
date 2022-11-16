@@ -11,10 +11,11 @@ containerEnvVariables:
   value: "1"
 - name: DISABLE_STAT
   value: "1"
-reqCPU: 200m
+reqCPU: 300m
 reqMem: 180Mi
 limitCPU: 300m
 limitMem: 300Mi
+namespace: microservices-development
 serviceAccountName: default
 portName: grpc
 

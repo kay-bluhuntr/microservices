@@ -13,6 +13,7 @@ containerEnvVariables:
   value: "1"
 - name: DISABLE_DEBUGGER
   value: "1"
+namespace: microservices-development
 serviceAccountName: default
 portName: server
 

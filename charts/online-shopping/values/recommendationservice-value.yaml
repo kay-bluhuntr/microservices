@@ -19,6 +19,7 @@ reqCPU: 100m
 reqMem: 220Mi
 limitCPU: 200m
 limitMem: 450Mi
+namespace: microservices-development
 serviceAccountName: default
 portName: grpc
 

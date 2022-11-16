@@ -7,6 +7,7 @@ containerPort: 7070
 containerEnvVariables:
 - name: REDIS_ADDR
   value: "redis-cart:6379"
+namespace: microservices-development
 serviceAccountName: default
 portName: server
 

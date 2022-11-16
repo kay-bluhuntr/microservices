@@ -11,6 +11,7 @@ spec:
     metadata:
       labels:
         app: {{ .Values.appName }}
+        env: serverless
       namespace: {{ .Values.namespace }}
       annotations:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"

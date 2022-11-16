@@ -31,7 +31,7 @@ containerEnvVariables:
   value: "1"
   # - name: CYMBAL_BRANDING
   #   value: "true"
-namespace: default
+namespace: microservices-development
 reqCPU: 100m
 reqMem: 64Mi
 limitCPU: 200m
