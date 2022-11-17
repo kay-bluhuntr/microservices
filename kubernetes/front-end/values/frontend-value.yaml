@@ -2,7 +2,7 @@
 appName: frontend
 appImage: gcr.io/google-samples/microservices-demo
 appReplicas: 1
-appVersion: v0.4.1
+#appVersion: v0.4.1
 containerPort: 8080
 containerEnvVariables:
 - name: PORT
@@ -23,8 +23,8 @@ containerEnvVariables:
   value: "adservice:9555"
   # # ENV_PLATFORM: One of: local, gcp, aws, azure, onprem, alibaba
   # # When not set, defaults to "local" unless running in GKE, otherwies auto-sets to gcp 
-  # - name: ENV_PLATFORM 
-  #   value: "aws"
+- name: ENV_PLATFORM 
+  value: "aws"
 - name: DISABLE_TRACING
   value: "1"
 - name: DISABLE_PROFILER
