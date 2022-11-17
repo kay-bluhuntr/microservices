@@ -1,20 +1,23 @@
 ####Deployment####
-appName: emailservice
+appName: productcatalogservice
 appImage: gcr.io/google-samples/microservices-demo
 appReplicas: 1
-appVersion: v0.4.1
-containerPort: 8080
+#appVersion: v0.4.1
+containerPort: 3550
 containerEnvVariables:
 - name: PORT
-  value: "8080"
+  value: "3550"
 - name: DISABLE_TRACING
   value: "1"
 - name: DISABLE_PROFILER
   value: "1"
+- name: DISABLE_DEBUGGER
+  value: "1"
+namespace: microservices-development
 serviceAccountName: default
 portName: grpc
 
 ####Service#####
 serviceType: ClusterIP
-servicePort: 5000
-targetPort: 8080
+servicePort: 3550
+targetPort: 3550

@@ -1,24 +1,21 @@
 ####Deployment####
-appName: adservice
+appName: emailservice
 appImage: gcr.io/google-samples/microservices-demo
 appReplicas: 1
-appVersion: v0.4.1
-containerPort: 9555
+#appVersion: v0.4.1
+containerPort: 8080
 containerEnvVariables:
 - name: PORT
-  value: "9555"
+  value: "8080"
 - name: DISABLE_TRACING
   value: "1"
-- name: DISABLE_STAT
+- name: DISABLE_PROFILER
   value: "1"
-reqCPU: 200m
-reqMem: 180Mi
-limitCPU: 300m
-limitMem: 300Mi
+namespace: microservices-development
 serviceAccountName: default
 portName: grpc
 
 ####Service#####
 serviceType: ClusterIP
-servicePort: 9555
-targetPort: 9555
+servicePort: 5000
+targetPort: 8080

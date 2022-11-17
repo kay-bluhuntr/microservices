@@ -1,22 +1,23 @@
 ####Deployment####
-appName: paymentservice
+appName: currencyservice
 appImage: gcr.io/google-samples/microservices-demo
 appReplicas: 1
-appVersion: v0.4.1
-containerPort: 50051
+#appVersion: v0.4.1
+containerPort: 7000
 containerEnvVariables:
 - name: PORT
-  value: "50051"
+  value: "7000"
 - name: DISABLE_TRACING
   value: "1"
 - name: DISABLE_PROFILER
   value: "1"
 - name: DISABLE_DEBUGGER
   value: "1"
+namespace: microservices-development
 serviceAccountName: default
 portName: grpc
 
 ####Service#####
 serviceType: ClusterIP
-servicePort: 50051
-targetPort: 50051
+servicePort: 7000
+targetPort: 7000

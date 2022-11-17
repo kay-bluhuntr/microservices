@@ -11,9 +11,8 @@ spec:
     metadata:
       labels:
         app: {{ .Values.appName }}
+        env: serverless
       namespace: {{ .Values.namespace }}
-      annotations:
-        sidecar.istio.io/rewriteAppHTTPProbers: "true"
     spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       terminationGracePeriodSeconds: 5
@@ -36,22 +35,6 @@ spec:
         ports:
         - name: {{ .Values.portName }}
           containerPort: {{ .Values.containerPort }}
-          readinessProbe:
-            initialDelaySeconds: 10
-            httpGet:
-              path: "/_healthz"
-              port: 8080
-              httpHeaders:
-              - name: "Cookie"
-                value: "shop_session-id=x-readiness-probe"
-          livenessProbe:
-            initialDelaySeconds: 10
-            httpGet:
-              path: "/_healthz"
-              port: 8080
-              httpHeaders:
-              - name: "Cookie"
-                value: "shop_session-id=x-liveness-probe"
         env:
         {{- range .Values.containerEnvVariables }}
         - name: {{ .name }}
@@ -64,18 +47,3 @@ spec:
           limits:
             cpu: {{ .Values.limitCPU }}
             memory: {{ .Values.limitMem }}
-
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-external
-spec:
-  type: LoadBalancer
-  selector:
-    app: frontend
-  ports:
-  - name: http
-    port: 80
-    targetPort: 8080

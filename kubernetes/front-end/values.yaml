@@ -3,7 +3,7 @@ appName: servicename
 appImage: gcr.io/google-samples/microservices-demo
 appService: cartservice
 appReplicas: 1
-appVersion: v0.4.1
+appVersion: v0.3.9
 containerPort: 8080
 containerEnvVariables:
 - name: Env_Var_One
@@ -16,13 +16,14 @@ containerEnvVariables:
   value: "1"
 namespace: default
 reqCPU: 100m
-reqMem: 64Mi
+reqMem: 128Mi
 limitCPU: 200m
-limitMem: 128Mi
+limitMem: 256Mi
 serviceAccountName: default
-portName: grpc
+portName: http
+
 
 ####Service#####
 serviceType: ClusterIP
-servicePort: 8080
+servicePort: 80
 targetPort: 8080

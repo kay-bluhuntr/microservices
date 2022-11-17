@@ -1,28 +1,23 @@
 ####Deployment####
-appName: recommendationservice
+appName: paymentservice
 appImage: gcr.io/google-samples/microservices-demo
 appReplicas: 1
-appVersion: v0.4.1
-containerPort: 8080
+#appVersion: v0.4.1
+containerPort: 50051
 containerEnvVariables:
 - name: PORT
-  value: "8080"
+  value: "50051"
 - name: DISABLE_TRACING
   value: "1"
 - name: DISABLE_PROFILER
   value: "1"
 - name: DISABLE_DEBUGGER
   value: "1"
-- name: PRODUCT_CATALOG_SERVICE_ADDR
-  value: "productcatalogservice:3550"
-reqCPU: 100m
-reqMem: 220Mi
-limitCPU: 200m
-limitMem: 450Mi
+namespace: microservices-development
 serviceAccountName: default
 portName: grpc
 
 ####Service#####
 serviceType: ClusterIP
-servicePort: 8080
-targetPort: 8080
+servicePort: 50051
+targetPort: 50051

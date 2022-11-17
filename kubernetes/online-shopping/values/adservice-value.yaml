@@ -1,22 +1,25 @@
 ####Deployment####
-appName: currencyservice
+appName: adservice
 appImage: gcr.io/google-samples/microservices-demo
 appReplicas: 1
-appVersion: v0.4.1
-containerPort: 7000
+#appVersion: v0.4.1
+containerPort: 9555
 containerEnvVariables:
 - name: PORT
-  value: "7000"
+  value: "9555"
 - name: DISABLE_TRACING
   value: "1"
-- name: DISABLE_PROFILER
+- name: DISABLE_STAT
   value: "1"
-- name: DISABLE_DEBUGGER
-  value: "1"
+reqCPU: 300m
+reqMem: 180Mi
+limitCPU: 300m
+limitMem: 500Mi
+namespace: microservices-development
 serviceAccountName: default
 portName: grpc
 
 ####Service#####
 serviceType: ClusterIP
-servicePort: 7000
-targetPort: 7000
+servicePort: 9555
+targetPort: 9555

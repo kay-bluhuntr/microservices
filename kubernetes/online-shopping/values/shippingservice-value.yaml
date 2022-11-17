@@ -2,7 +2,7 @@
 appName: shippingservice
 appImage: gcr.io/google-samples/microservices-demo
 appReplicas: 1
-appVersion: v0.4.1
+#appVersion: v0.4.1
 containerPort: 50051
 containerEnvVariables:
 - name: PORT
@@ -13,6 +13,7 @@ containerEnvVariables:
   value: "1"
 - name: DISABLE_DEBUGGER
   value: "1"
+namespace: microservices-development
 serviceAccountName: default
 portName: server
 

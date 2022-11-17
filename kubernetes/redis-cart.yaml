@@ -10,6 +10,8 @@ spec:
     metadata:
       labels:
         app: redis-cart
+        env: serverless
+      namespace: microservices-development
     spec:
       securityContext:
         fsGroup: 1000
