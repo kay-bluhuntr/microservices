@@ -1,0 +1,61 @@
+[
+    {
+        "ParameterKey": "VPCStackName",
+        "ParameterValue": "microservices-network"
+    },
+
+    {
+        "ParameterKey": "VpcName",
+        "ParameterValue": "microservices"
+    },
+
+    {
+        "ParameterKey": "VpcCidr",
+        "ParameterValue": "10.0.0.0/16"
+    },
+
+    {
+        "ParameterKey": "PublicSubnetACidr",
+        "ParameterValue": "10.0.8.0/24"
+    },
+
+    {
+        "ParameterKey": "PublicSubnetBCidr",
+        "ParameterValue": "10.0.12.0/24"
+    },
+
+    {
+        "ParameterKey": "PublicSubnetCCidr",
+        "ParameterValue": "10.0.16.0/24"
+    },
+
+    {
+        "ParameterKey": "PrivateSubnetACidr",
+        "ParameterValue": "10.0.24.0/24"
+    },
+
+    {
+        "ParameterKey": "PrivateSubnetBCidr",
+        "ParameterValue": "10.0.32.0/24"
+    },
+
+    {
+        "ParameterKey": "PrivateSubnetCCidr",
+        "ParameterValue": "10.0.40.0/24"
+    },
+
+    {
+        "ParameterKey": "DatabaseSubnetACidr",
+        "ParameterValue": "10.0.48.0/24"
+    },
+
+    {
+        "ParameterKey": "DatabaseSubnetBCidr",
+        "ParameterValue": "10.0.56.0/24"
+    },
+
+    {
+        "ParameterKey": "DatabaseSubnetCCidr",
+        "ParameterValue": "10.0.64.0/24"
+    }
+]

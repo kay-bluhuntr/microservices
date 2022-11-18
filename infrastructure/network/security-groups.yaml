@@ -1,12 +1,23 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Security Groups"
+
+Parameters:
+
+  StackName:
+    Type: String
+    Description: "Stack Name the Security Groups are added"
+
 ######################################################################
-  # Security Groups
-  ######################################################################
+##### Security Groups
+#######################################################################
+Resources:
 
   LoadBalancerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
-    Properties: 
+    Properties:
       GroupDescription: "Allow HTTP Inbound/Outbound in Public Subnet"
-      GroupName: "Public SG"
+      GroupName: "Public Security Group"
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 80
@@ -17,16 +28,20 @@
           FromPort: 443
           ToPort: 443
           CidrIp: 0.0.0.0/0
-      Tags: 
+      Tags:
         - Key: "Name"
-          Value: "Public-sg"
-      VpcId: !Ref VPC
-
+          Value: !Join
+            - ''
+            - - !Ref StackName
+              - '-public-security-group'
+      VpcId:
+        Fn::ImportValue:
+          !Sub "${StackName}-VPCId"
   ApplicationSecurityGroup:
     Type: AWS::EC2::SecurityGroup
-    Properties: 
+    Properties:
       GroupDescription: "Allow HTTP Inbound/Outbound in Application Private Subnet"
-      GroupName: "Private App SG"
+      GroupName: "Private Security Group"
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 80
@@ -38,26 +53,31 @@
           ToPort: 443
           CidrIp: 0.0.0.0/0
 
-        - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          CidrIp: 0.0.0.0/0
-      Tags: 
+      Tags:
         - Key: "Name"
-          Value: "Private-sg"
-      VpcId: !Ref VPC
-
-  DatabaseSecurityGroup:
+          Value: !Join
+          - ''
+          - - !Ref StackName
+            - '-private-security-group'
+      VpcId:
+        Fn::ImportValue:
+          !Sub "${StackName}-VPCId"
+  DataSecurityGroup:
     Type: AWS::EC2::SecurityGroup
-    Properties: 
-      GroupDescription: "Allow PostgreSQL Inbound/Outbound from Application Private Subnet"
-      GroupName: "Database SG"
+    Properties:
+      GroupDescription: "Allow PostgreSQL Inbound/Outbound Subnet"
+      GroupName: "Database Security Group"
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 5432
           ToPort: 5432
           CidrIp: 0.0.0.0/0
-      Tags: 
+      Tags:
         - Key: "Name"
-          Value: "Database-sg"
-      VpcId: !Ref VPC
+          Value: !Join
+          - ''
+          - - !Ref StackName
+            - '-data-security-group'
+      VpcId:
+        Fn::ImportValue:
+          !Sub "${StackName}-VPCId"
