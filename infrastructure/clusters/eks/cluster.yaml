@@ -1,0 +1,31 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: microservices
+  region: eu-west-2
+
+vpc:
+  subnets:
+    private:
+      eu-west-1a: { id: }
+      eu-west-1b: { id: }
+      eu-west-1c: { id: }
+
+fargateProfiles:
+  - name: fargate-default
+    selectors:
+      # All workloads in the "default" Kubernetes namespace will be
+      # scheduled onto Fargate:
+      - namespace: default
+      # All workloads in the "kube-system" Kubernetes namespace will be
+      # scheduled onto Fargate:
+      - namespace: kube-system
+  - name: microservices
+    selectors:
+      # All workloads in the "microservices-*" Kubernetes namespace matching the following
+      # label selectors will be scheduled onto Fargate:
+      - namespace: microservices-*
+        labels:
+          env: serverless
+          checks: passed
