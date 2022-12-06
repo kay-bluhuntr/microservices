@@ -1,6 +1,22 @@
 ---
+- name: Wait for ssh Connection
+  hosts: all
+  become: yes
+  gather_facts: False
+  tasks:
+    - name: Ensure ssh is open
+      wait_for:
+        port: 22
+        delay: 20
+        timeout: 120
+        search_regex: OpenSSH
+        host: {{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}
+      vars:
+        ansible_connection: local
+        ansible_python_interpreter: /usr/bin/python
+
 - name: Install Python3 and Docker
-  hosts: docker_server
+  hosts: all
   become: yes
   gather_facts: False
   tasks:
@@ -20,7 +36,7 @@
         state: present
 
 - name: Install Docker-Compose
-  hosts: docker_server
+  hosts: all
   become: yes
   tasks:
     - name: Install Docker-Compose
@@ -30,7 +46,7 @@
         mode: +x
 
 - name: Start and Enable Docker
-  hosts: docker_server
+  hosts: all
   become: yes
   tasks:
     - name: Start Docker
@@ -50,7 +66,7 @@
           - docker-compose
 
 - name: Create docker user
-  hosts: docker_server
+  hosts: all
   become: yes
   tasks:
     - name: Create new docker user
@@ -58,11 +74,11 @@
         name: docker-user
         groups: {{docker_groups}}
         append: yes
-    - name: Recconnect to docker_server
+    - name: Reconnect to docker_server
       meta: reset_connection
 
 - name: Test docker
-  hosts: docker_server
+  hosts: all
   tasks:
     - name: Pull redis
       community.docker.docker_image:
