@@ -8,12 +8,10 @@ variable "description" {
 }
 
 variable "db_max_connections" {
-  default = 10
+  default = 30
 }
 
 variable "aurora_family" {
-  description = "Database family - eg postgres12"
+  description = "Database family - eg aurora-postgres14"
   default = "aurora-postgresql14"
 }
-
-# variable "context" { description = "A set of predefined variables coming from the Make DevOps automation scripts and shared by the means of the context.tf file in each individual stack" }

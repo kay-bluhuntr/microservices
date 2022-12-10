@@ -1,9 +1,10 @@
 # ###### RDS related ############
-# ########### for module
 # # ==============================================================================
 # # Mandatory variables
 
-variable "cluster_id" { description = "The unique id of the aurora cluster" }
+variable "cluster_id" { 
+  description = "The unique id of the aurora cluster" 
+}
 
 variable "aurora_cluster_parameter_group_name"{
   description = "Name of parameter group to be created for use with this aurora cluster"
@@ -35,10 +36,6 @@ variable "cluster_master_username" {
   description = "username for master user on cluster"
 }
 
-# variable "db_subnet_group_name" {
-#   description = "Subnet for databases"
-# }
-
 variable "auto_minor_version_upgrade" {
   description = "True for aurora cluster to automate minor version upgrades; else false"
   default = false
@@ -56,15 +53,15 @@ variable "aurora_cluster_instance_class" {
 
 
 variable "aurora_cluster_auto_scaling_enabled" {
-  description = "Enables/Disabls auto-scaling of read-replicas in aurora cluster"
+  description = "Enables/Disable auto-scaling of read-replicas in aurora cluster"
   default = true
 }
-variable "minimum_reader_capacity" {
+variable "min_reader_capacity" {
   description = "The minimum number of read replicas in cluster"
   default = 1
 }
 
-variable "maximum_reader_capacity" {
+variable "max_reader_capacity" {
   description = "Auto-scaling will not exceed the maximum number of read replicas in cluster"
   default = 2
 }
@@ -74,18 +71,14 @@ variable "terraform_platform_state_store" {
   default = "compare-terraform"
 }
 
-# variable "security_group_name" {
-#   description = "Name of VPC security group"
-# }
-
 variable "backup_window" {
   description = "Time window to perform backup of aurora cluster"
-  default     = "00:00-01:00"
+  default     = "03:00-05:00"
 }
 
 variable "preferred_cluster_maintenance_window" {
   description = "Time window to maintenance on Aurora Cluster"
-  default     = "Wed:01:00-Wed:03:00"
+  default     = "Sun:04:00-Wed:06:00"
 }
 
 variable "copy_tags_to_snapshot" {
