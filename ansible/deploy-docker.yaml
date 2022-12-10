@@ -1,0 +1,86 @@
+---
+- name: Wait for ssh Connection
+  hosts: all
+  become: yes
+  gather_facts: False
+  tasks:
+    - name: Ensure ssh is open
+      wait_for:
+        port: 22
+        delay: 20
+        timeout: 120
+        search_regex: OpenSSH
+        host: {{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}
+      vars:
+        ansible_connection: local
+        ansible_python_interpreter: /usr/bin/python
+
+- name: Install Python3 and Docker
+  hosts: all
+  become: yes
+  gather_facts: False
+  tasks:
+    - name: Install Python3
+      vars:
+        ansible_python_interpreter: /usr/bin/python
+      yum:
+        name: python3
+        update_cache: yes
+        state: present
+    - name: Install Docker
+      vars:
+        ansible_python_interpreter: /usr/bin/python
+      yum:
+        name: docker
+        update_cache: yes
+        state: present
+
+- name: Install Docker-Compose
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Docker-Compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/v2.12.2/docker-compose-linux-{{lookup('pipe', 'uname -m')}}
+        dest: /usr/local/bin/docker-compose
+        mode: +x
+
+- name: Start and Enable Docker
+  hosts: all
+  become: yes
+  tasks:
+    - name: Start Docker
+      systemd:
+        name: docker
+        state: started
+    - name: Enable Docker
+      systemd:
+        name: docker
+        state: enabled
+
+    # Install docker for python module for Amazon ec2
+    - name: Install python module
+      pip:
+        name: 
+          - docker
+          - docker-compose
+
+- name: Create docker user
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create new docker user
+      user:
+        name: docker-user
+        groups: {{docker_groups}}
+        append: yes
+    - name: Reconnect to docker_server
+      meta: reset_connection
+
+- name: Test docker
+  hosts: all
+  tasks:
+    - name: Pull redis
+      community.docker.docker_image:
+        name: redis
+        source: pull
