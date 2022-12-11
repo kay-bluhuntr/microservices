@@ -107,6 +107,115 @@
                 "nanos": 990000000
             },
             "categories": ["kitchen"]
+        },
+
+        {
+            "id": "PRECHR749WS",
+            "name": "Christmas Hamper",
+            "description": "The best christmas hamper present.",
+            "picture": "/static/img/products/hamper01.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 549,
+                "nanos": 990000000
+            },
+            "categories": ["hampers"]
+        },
+        {
+            "id": "66VYYSTEUP",
+            "name": "Shirt",
+            "description": "Perfectly cropped cotton tank, with a scooped neckline.",
+            "picture": "/static/img/products/shirt.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 389,
+                "nanos": 990000000
+            },
+            "categories": ["clothing", "tops"]
+        },
+        {
+            "id": "1YMTEU1N4O",
+            "name": "earring",
+            "description": "Rose gold love earring.",
+            "picture": "/static/img/products/earring.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 4099,
+                "nanos": 990000000
+            },
+            "categories": ["accessories", "jewellery"]
+        },
+        {
+            "id": "L9EYR97KIM",
+            "name": "Headphones",
+            "description": "A game changer with the best base quality.",
+            "picture": "/static/img/products/headphones.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 499,
+                "nanos": 990000000
+            },
+            "categories": ["technology"]
+        },
+        {
+            "id": "2ZYFJ3GM2N",
+            "name": "Backpack",
+            "description": "This lightweight backpack made of leather. It's perfect for travel.",
+            "picture": "/static/img/products/backpack.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 324,
+                "nanos": 990000000
+            },
+            "categories": ["accessories", "bags"]
+        },
+        {
+            "id": "0PUKUH90V0",
+            "name": "Cardholder",
+            "description": "This small but intricate candle holder is an excellent gift.",
+            "picture": "/static/img/products/card-holder.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 109,
+                "nanos": 990000000
+            },
+            "categories": ["accessories"]
+        },
+        {
+            "id": "LS0SQXUNUM",
+            "name": "Portable Speaker",
+            "description": "Add some loud volume to your tiny room.",
+            "picture": "/static/img/products/portable-speaker.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 999,
+                "nanos": 990000000
+            },
+            "categories": ["technology"]
+        },
+        {
+            "id": "9SIKA8TOJO",
+            "name": "Night Dress",
+            "description": "Slim fot open-back satin dress.",
+            "picture": "/static/img/products/maxi-dress.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 799,
+                "nanos": 490000000
+            },
+            "categories": ["dresses"]
+        },
+        {
+            "id": "6E96W0YYFZ",
+            "name": "Skincare",
+            "description": "Lush skin cavier luxury cream.",
+            "picture": "/static/img/products/mug.jpg",
+            "priceUsd": {
+                "currencyCode": "USD",
+                "units": 198,
+                "nanos": 990000000
+            },
+            "categories": ["beauty", "skincare"]
         }
     ]
 }
