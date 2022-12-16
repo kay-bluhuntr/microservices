@@ -2,7 +2,7 @@
 appName: productcatalog
 appImage: slimfit
 appReplicas: 1
-appVersion: 0.1.0
+appVersion: latest
 containerPort: 3550
 containerEnvVariables:
 - name: PORT

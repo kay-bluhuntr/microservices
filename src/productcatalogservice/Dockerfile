@@ -41,7 +41,7 @@ COPY products.json .
 ENV GOTRACEBACK=single
 
 EXPOSE 3550
-ENTRYPOINT ["/src/server"]
+ENTRYPOINT ["/microservices/src/server"]
 
 FROM without-grpc-health-probe-bin
 # renovate: datasource=github-releases depName=grpc-ecosystem/grpc-health-probe
