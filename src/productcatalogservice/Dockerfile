@@ -16,7 +16,7 @@ FROM golang:1.19.4-alpine@sha256:f33331e12ca70192c0dbab2d0a74a52e1dd344221507d88
 RUN apk add --no-cache ca-certificates git
 RUN apk add build-base
 
-WORKDIR /microservices/src/productcatalogservice
+WORKDIR /src
 # restore dependencies
 COPY go.sum ./
 COPY go.mod ./
@@ -31,7 +31,7 @@ RUN go build -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o /microservices/src/productcata
 FROM alpine:3.17.0@sha256:8914eb54f968791faf6a8638949e480fef81e697984fba772b3976835194c6d4 AS without-grpc-health-probe-bin
 RUN apk add --no-cache ca-certificates
 
-WORKDIR /microservices/src
+WORKDIR /src
 COPY --from=builder microservices/src/productcatalogservice ./server
 COPY products.json .
 
@@ -41,7 +41,7 @@ COPY products.json .
 ENV GOTRACEBACK=single
 
 EXPOSE 3550
-ENTRYPOINT ["/microservices/src/server"]
+ENTRYPOINT ["/src/server"]
 
 FROM without-grpc-health-probe-bin
 # renovate: datasource=github-releases depName=grpc-ecosystem/grpc-health-probe
