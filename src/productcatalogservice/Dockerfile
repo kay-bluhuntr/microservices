@@ -18,19 +18,21 @@ RUN apk add build-base
 
 WORKDIR /src
 # restore dependencies
-COPY go.mod go.sum ./
+COPY go.sum ./
+COPY go.mod ./
+
 RUN go mod download
 COPY . .
 
 # Skaffold passes in debug-oriented compiler flags
 ARG SKAFFOLD_GO_GCFLAGS
-RUN go build -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o /productcatalogservice .
+RUN go build -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o /microservices/src/productcatalogservice .
 
 FROM alpine:3.17.0@sha256:8914eb54f968791faf6a8638949e480fef81e697984fba772b3976835194c6d4 AS without-grpc-health-probe-bin
 RUN apk add --no-cache ca-certificates
 
 WORKDIR /src
-COPY --from=builder /productcatalogservice ./server
+COPY --from=builder microservices/src/productcatalogservice ./server
 COPY products.json .
 
 # Definition of this variable is used by 'skaffold debug' to identify a golang binary.
