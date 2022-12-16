@@ -27,7 +27,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: .
-          file: src/productcatalogservice/Dockerfile
+          context: src/productcatalogservice/
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USER }}/productcatalog:latest

@@ -18,9 +18,7 @@ RUN apk add build-base
 
 WORKDIR /src
 # restore dependencies
-COPY /src/productcatalogservice/go.sum ./
-COPY /src/productcatalogservice/go.mod ./
-
+COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
 
@@ -33,7 +31,7 @@ RUN apk add --no-cache ca-certificates
 
 WORKDIR /src
 COPY --from=builder /productcatalogservice ./server
-COPY src/productcatalogservice/products.json .
+COPY products.json .
 
 # Definition of this variable is used by 'skaffold debug' to identify a golang binary.
 # Default behavior - a failure prints a stack trace for the current goroutine.
