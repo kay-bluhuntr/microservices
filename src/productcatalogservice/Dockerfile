@@ -19,7 +19,10 @@ RUN apk add build-base
 WORKDIR /src/productcatalogservice
 # restore dependencies
 COPY go.sum ./
+
+WORKDIR /src/productcatalogservice
 COPY go.mod ./
+
 RUN go mod download
 COPY . .
 
