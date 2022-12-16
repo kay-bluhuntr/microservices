@@ -24,16 +24,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Navigate to Product Service Catalog
-        id: ProductCatalog
-        run: |
-          echo Navigate to ProductCatalog Directory
-          cd src/productcatalogservice
-
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./Dockerfile
+          file: src/productcatalogservice/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USER }}/productcatalog:latest
