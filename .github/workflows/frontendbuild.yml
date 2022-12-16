@@ -1,4 +1,4 @@
-name: Build Application Code
+name: Build Frontend Application Code
 on:
   push:
     branches:

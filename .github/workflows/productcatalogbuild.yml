@@ -1,4 +1,4 @@
-name: Build Application Code
+name: Build Product Catalog Application Code
 on:
   push:
     branches:

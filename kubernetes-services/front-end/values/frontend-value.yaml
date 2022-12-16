@@ -1,8 +1,8 @@
 ####Deployment####
 appName: frontend
-appImage: gcr.io/google-samples/microservices-demo
+appImage: slimfit
 appReplicas: 1
-#appVersion: v0.4.1
+appVersion: latest
 containerPort: 8080
 containerEnvVariables:
 - name: PORT
