@@ -1,8 +1,8 @@
 ####Deployment####
-appName: productcatalogservice
-appImage: gcr.io/google-samples/microservices-demo
+appName: productcatalog
+appImage: slimfit
 appReplicas: 1
-#appVersion: v0.4.1
+appVersion: 0.1.0
 containerPort: 3550
 containerEnvVariables:
 - name: PORT
