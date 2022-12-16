@@ -16,9 +16,9 @@ FROM golang:1.19.4-alpine@sha256:f33331e12ca70192c0dbab2d0a74a52e1dd344221507d88
 RUN apk add --no-cache ca-certificates git
 RUN apk add build-base
 
-WORKDIR /src/productcatalogservice
+WORKDIR /src
 # restore dependencies
-COPY go.sum ./
+COPY /src/productcatalogservice/go.sum ./
 COPY /src/productcatalogservice/go.mod ./
 
 RUN go mod download
