@@ -27,12 +27,11 @@ jobs:
       - name: Print Working Directory 
         run: |
           pwd 
-          echo `pwd`
 
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: ./src
+          context: ./src/productcatalogservice
           file: src/productcatalogservice/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USER }}/productcatalog:latest
