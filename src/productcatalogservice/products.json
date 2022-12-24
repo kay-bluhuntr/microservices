@@ -128,7 +128,7 @@
             "picture": "/static/img/products/shirt.jpg",
             "priceUsd": {
                 "currencyCode": "USD",
-                "units": 389,
+                "units": 39,
                 "nanos": 990000000
             },
             "categories": ["clothing", "tops"]
@@ -164,7 +164,7 @@
             "picture": "/static/img/products/backpack.jpg",
             "priceUsd": {
                 "currencyCode": "USD",
-                "units": 324,
+                "units": 124,
                 "nanos": 990000000
             },
             "categories": ["accessories", "bags"]
@@ -176,7 +176,7 @@
             "picture": "/static/img/products/card-holder.jpg",
             "priceUsd": {
                 "currencyCode": "USD",
-                "units": 109,
+                "units": 59,
                 "nanos": 990000000
             },
             "categories": ["accessories"]
@@ -209,10 +209,10 @@
             "id": "6E96W0YYFZ",
             "name": "Skincare",
             "description": "Lush skin cavier luxury cream.",
-            "picture": "/static/img/products/mug.jpg",
+            "picture": "/static/img/products/skincare.jpg",
             "priceUsd": {
                 "currencyCode": "USD",
-                "units": 198,
+                "units": 18,
                 "nanos": 990000000
             },
             "categories": ["beauty", "skincare"]
