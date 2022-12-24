@@ -28,7 +28,8 @@ This application is used to demonstrate use of technologies like:
 
 ## Quickstart (MiniKube)
 
-1. Install Minikube **[Instruction Here] (https://minikube.sigs.k8s.io/docs/start/)** or Skip if you already have minikube installed or any other kubernetes cluster ready
+1. Install Minikube 
+**[Instruction Here] (https://minikube.sigs.k8s.io/docs/start/)** or Skip if you already have minikube installed or any other kubernetes cluster ready
 
 2. **Clone this repository.**
 
@@ -37,7 +38,7 @@ git clone https://github.com/kay-bluhuntr/microservices.git
 cd microservices
 ```
 
-3. **Install Helm/Helm Chart** 
+3. Install Helm/Helm Chart
 **[Helm can be installed from here](https://helm.sh/docs/intro/install/)**
 Sample: Using MACOS here and brew
 ```
@@ -75,7 +76,30 @@ redis-cart-8ff648fcd-wpbrc               1/1     Running   0          24m
 shippingservice-5cd7dff8bd-5x968         1/1     Running   0          24m
 ```
 
+6. **Get the running services**
+```
+kubectl get svc -n microservices-development
+```
+You should see this:
+
+```
+NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+adservice               ClusterIP      10.107.24.16     <none>        9555/TCP       71m
+cartservice             ClusterIP      10.104.220.98    <none>        7070/TCP       71m
+checkoutservice         ClusterIP      10.111.204.225   <none>        5050/TCP       71m
+currencyservice         ClusterIP      10.106.40.115    <none>        7000/TCP       71m
+emailservice            ClusterIP      10.109.236.165   <none>        5000/TCP       71m
+frontend                ClusterIP      10.105.25.104    <none>        80/TCP         71m
+frontend-external       LoadBalancer   10.96.155.57     <pending>     80:32082/TCP   71m
+paymentservice          ClusterIP      10.100.231.231   <none>        50051/TCP      71m
+productcatalogservice   ClusterIP      10.99.33.52      <none>        3550/TCP       71m
+recommendationservice   ClusterIP      10.101.157.75    <none>        8080/TCP       71m
+redis-cart              ClusterIP      10.104.170.237   <none>        6379/TCP       71m
+shippingservice         ClusterIP      10.98.10.6       <none>        50051/TCP      71m
+```
+
 7. **Access the web frontend in a browser** 
+
 http://localhost:8080
 
 ```
