@@ -100,11 +100,10 @@ shippingservice         ClusterIP      10.98.10.6       <none>        50051/TCP 
 
 7. **Access the web frontend in a browser** 
 
-http://localhost:8080
-
 ```
 kubectl port-forward deployment/frontend 8080:8080 -n microservices-development
 ```
+http://localhost:8080
 
 8. [Optional] **Clean up**:
 
