@@ -8,7 +8,6 @@ cartservice/
 checkoutservice/
 currencyservice/
 emailservice/
-frontend/
 loadgenerator/
 paymentservice/
 recommendationservice/

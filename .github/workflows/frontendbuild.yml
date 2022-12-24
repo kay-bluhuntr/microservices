@@ -1,4 +1,4 @@
-name: Build Application Code
+name: Build Frontend Application Code
 on:
   push:
     branches:
@@ -9,7 +9,7 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 jobs:
-  build:
+  build-docker-image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -24,14 +24,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Print Working Directory 
-        run: |
-          pwd 
-
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: ./src/productcatalogservice
-          file: src/productcatalogservice/Dockerfile
+          context: ./src/frontend
+          file: src/frontend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USER }}/productcatalogservice:latest
+          tags: ${{ secrets.DOCKER_USER }}/frontend:latest
