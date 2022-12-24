@@ -48,74 +48,45 @@ brew install helm
 
 ```
 cd kubernetes-services
-ch
-
-kubectl port-forward deployment/frontend 8080:8080 -n microservices-development
-
+chmod 700 deploy-services.sh destroy-service.sh
+./deploy-service.sh
 ```
 
 5. **Wait for the Pods to be ready.**
 
 ```
-kubectl get pods
+kubectl get pods -n microservices-development
 ```
 
 After a few minutes, you should see:
 
 ```
 NAME                                     READY   STATUS    RESTARTS   AGE
-adservice-76bdd69666-ckc5j               1/1     Running   0          2m58s
-cartservice-66d497c6b7-dp5jr             1/1     Running   0          2m59s
-checkoutservice-666c784bd6-4jd22         1/1     Running   0          3m1s
-currencyservice-5d5d496984-4jmd7         1/1     Running   0          2m59s
-emailservice-667457d9d6-75jcq            1/1     Running   0          3m2s
-frontend-6b8d69b9fb-wjqdg                1/1     Running   0          3m1s
-loadgenerator-665b5cd444-gwqdq           1/1     Running   0          3m
-paymentservice-68596d6dd6-bf6bv          1/1     Running   0          3m
-productcatalogservice-557d474574-888kr   1/1     Running   0          3m
-recommendationservice-69c56b74d4-7z8r5   1/1     Running   0          3m1s
-redis-cart-5f59546cdd-5jnqf              1/1     Running   0          2m58s
-shippingservice-6ccc89f8fd-v686r         1/1     Running   0          2m58s
+adservice-7cbb8b8d5-9mpnb                1/1     Running   0          24m
+cartservice-b658577cd-7zsdp              1/1     Running   0          24m
+checkoutservice-5f5d4fd4d5-f7w8v         1/1     Running   0          24m
+currencyservice-6c69948596-4hc48         1/1     Running   0          24m
+emailservice-684495c5c5-86tl2            1/1     Running   0          24m
+frontend-557cdf6d85-b5lqf                1/1     Running   0          24m
+paymentservice-d7698c59-tgg8j            1/1     Running   0          24m
+productcatalogservice-7847d85c4f-wvjnv   1/1     Running   0          24m
+recommendationservice-678c96557c-rmx9m   1/1     Running   0          24m
+redis-cart-8ff648fcd-wpbrc               1/1     Running   0          24m
+shippingservice-5cd7dff8bd-5x968         1/1     Running   0          24m
 ```
 
-7. **Access the web frontend in a browser** using the frontend's `EXTERNAL_IP`.
+7. **Access the web frontend in a browser** 
+http://localhost:8080
 
 ```
-kubectl get service frontend-external | awk '{print $4}'
+kubectl port-forward deployment/frontend 8080:8080 -n microservices-development
 ```
-
-*Example output - do not copy*
-
-```
-EXTERNAL-IP
-<your-ip>
-```
-
-**Note**- you may see `<pending>` while GCP provisions the load balancer. If this happens, wait a few minutes and re-run the command.
 
 8. [Optional] **Clean up**:
 
 ```
-gcloud container clusters delete onlineboutique \
-    --project=${PROJECT_ID} --zone=${ZONE}
+./destroy-services.sh
 ```
-
-## Use Terraform to provision a GKE cluster and deploy Online Boutique
-
-The [`/terraform` folder](terraform) contains instructions for using [Terraform](https://www.terraform.io/intro) to replicate the steps from [**Quickstart (GKE)**](#quickstart-gke) above.
-
-## Other deployment variations
-
-- **Istio**: [See these instructions.](docs/service-mesh.md)
-- **Anthos Service Mesh**: [See these instructions](/docs/service-mesh.md)
-- **non-GKE clusters (Minikube, Kind)**: see the [Development Guide](/docs/development-guide.md)
-
-## Deploy Online Boutique variations with Kustomize
-
-The [`/kustomize` folder](kustomize) contains instructions for customizing the deployment of Online Boutique with different variations such as:
-* integrating with [Google Cloud Operations](kustomize/components/google-cloud-operations/)
-* replacing the in-cluster Redis cache with [Google Cloud Memorystore (Redis)](kustomize/components/memorystore) or [Google Cloud Spanner](kustomize/components/spanner)
-* etc.
 
 ## Architecture
 
