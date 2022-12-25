@@ -1,12 +1,25 @@
+This Project is multiple Domains:
+**Infrastructure**
+**Microservices**
+**Source Code**
+
+
+
+
+
+
+
+
+**The Microservices**
 <p align="center">
 <img src="src/frontend/static/icons/Hipster_HeroLogoMaroon.svg" width="300" alt="Online Boutique" />
 </p>
 
 
 
-This is a fork of the **Online Boutique** unofficial customised microservices project by google which is a cloud-first microservices demo application.
-**Online Boutique** consists of an 11-tier microservices application. The application is a
-web-based e-commerce app where users can browse items,
+This is a fork of the **Online Boutique** unofficial microservices project by google which I have customised by adding some new products and changed to use  Github Action as the CI. 
+A cloud-first microservices demo application.
+**Online Boutique** consists of an 11-tier microservices application. The application is a web-based e-commerce app where users can browse items,
 add them to the cart, and purchase them.
 
 This application is used to demonstrate use of technologies like:
