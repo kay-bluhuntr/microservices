@@ -62,6 +62,7 @@ cd microservices
 Sample: Using MACOS here and brew
 ```
 brew install helm
+brew install helmfile
 ```
 
 4. **Deploy the App to your cluster.**
