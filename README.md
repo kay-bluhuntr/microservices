@@ -6,6 +6,8 @@ This Project is multiple Domains:
 
 **Source Code**
 
+**Monitoring and Alerting**
+
 
 
 
@@ -129,6 +131,78 @@ http://localhost:8080
 ```
 ./destroy-services.sh
 ```
+
+
+## Monitoring and Alerting [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/)
+
+1. **Get Prometheus/Grafana Repo Via Helm**
+
+```
+ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+ helm repo update
+```
+
+2. **Create a namespace for Monitoring**
+
+```
+kubectl create ns monitoring
+```
+
+3. **Install Prometheus/Grafana**
+
+```
+helm install monitoring prometheus-community/kube-prometheus-stack -n monitoring
+```
+4. **Check Installations**
+
+```
+kubectl get pods -n monitoring
+```
+You Should see this:
+
+NAME                                                     READY   STATUS    RESTARTS      AGE
+alertmanager-monitoring-kube-prometheus-alertmanager-0   2/2     Running   1 (89s ago)   90s
+monitoring-grafana-d8bf5688-z2xzt                        3/3     Running   0             103s
+monitoring-kube-prometheus-operator-86db49644c-lfxvr     1/1     Running   0             103s
+monitoring-kube-state-metrics-5d8cb49c5d-7k2bb           1/1     Running   0             103s
+monitoring-prometheus-node-exporter-l9tv7                1/1     Running   0             103s
+prometheus-monitoring-kube-prometheus-prometheus-0       2/2     Running   0             90s
+
+```
+kubectl get svc -n monitoring
+```
+You Should see this:
+
+NAME                                      TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+alertmanager-operated                     ClusterIP   None             <none>        9093/TCP,9094/TCP,9094/UDP   2m32s
+monitoring-grafana                        ClusterIP   10.111.152.111   <none>        80/TCP                       2m45s
+monitoring-kube-prometheus-alertmanager   ClusterIP   10.99.108.101    <none>        9093/TCP                     2m45s
+monitoring-kube-prometheus-operator       ClusterIP   10.97.97.144     <none>        443/TCP                      2m45s
+monitoring-kube-prometheus-prometheus     ClusterIP   10.101.120.83    <none>        9090/TCP                     2m45s
+monitoring-kube-state-metrics             ClusterIP   10.103.51.57     <none>        8080/TCP                     2m45s
+monitoring-prometheus-node-exporter       ClusterIP   10.109.9.253     <none>        9100/TCP                     2m45s
+prometheus-operated                       ClusterIP   None             <none>        9090/TCP                     2m32s
+
+5. **Port Foward and Connect to Prometheus/Grafana**
+
+```
+export SVC_NAME=$(kubectl get svc -n monitoring -l "app=kube-prometheus-stack-prometheus" -o jsonpath="{.items[0].metadata.name}")
+kubectl -n monitoring port-forward svc/$SVC_NAME 9090 #Prometheus
+kubectl -n monitoring port-forward svc/monitoring-grafana 8080:80  #Grafana
+```
+
+6. **Default Grafana cred**
+```
+username: admin
+pass: prom-operator
+```
+
+## Grafana/Prometheus Screenshots
+
+| Grafana                                                                                                         | Prometheus                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| [![Screenshot of Grafana](./docs/img/grafana.png)](./docs/img/grafana.png) | [![Screenshot of checkout Prometheus](./docs/img/prometheus.png)](./docs/img/prometheus.png) |
+
 
 ## Architecture
 
