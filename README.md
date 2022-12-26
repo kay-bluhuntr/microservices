@@ -1,12 +1,12 @@
-This Project is multiple Domains:
+This Project has multiple Domains:
 
-**Infrastructure**
+* Infrastructure**
 
-**Microservices**
+* Microservices**
 
-**Source Code**
+* Source Code**
 
-**Monitoring and Alerting**
+* Monitoring and Alerting**
 
 
 
